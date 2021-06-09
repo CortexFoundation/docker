@@ -6,7 +6,7 @@ https://github.com/ucwong/docker
 ## Docker image build and run
 ```
 docker build -t ${image} .
-docker run --rm -d ${image}
+docker run --rm -d -v /root/.cortex:/root/.cortex/ ${image}
 ```
 
 ## Node boot config
