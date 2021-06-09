@@ -3,6 +3,12 @@
 ## Docker install
 https://github.com/ucwong/docker
 
+## Docker image build and run
+```
+docker build -t ${image} .
+docker run --rm -d -p 127.0.0.1:8545:8545 -v /root/.cortex:/root/.cortex/ ${image}
+```
+
 ## Node boot config
 vim node.conf
 ```
