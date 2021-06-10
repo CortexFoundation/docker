@@ -30,7 +30,7 @@ RUN ls -alt /work/bin/plugins
 #RUN cp /work/src/CortexTheseus/docker/node.conf /etc/supervisor/conf.d/
 
 # if you want to use a specified supervisor conf
-COPY conf/*.conf /etc/supervisor/conf.d/
+COPY conf.d/*.conf /etc/supervisor/conf.d/
 
 RUN ls /etc/supervisor/conf.d/
 
