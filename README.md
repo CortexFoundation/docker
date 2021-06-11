@@ -10,7 +10,9 @@ docker run --rm -d -v /root/.cortex:/root/.cortex/ ${image}
 ```
 
 ## Node boot config
-vim node.conf
+```
+vim conf.d/node.conf
+```
 ```
 [program:node]
 user=root
