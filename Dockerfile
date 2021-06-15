@@ -38,6 +38,11 @@ RUN cat /etc/supervisor/conf.d/node.conf
 
 RUN rm -rf /work/src/CortexTheseus
 
+RUN cd /work/src && git clone && git clone https://github.com/chihaya/chihaya.git \
+  && cd chihaya \
+  && git checkout 057f7afefc383717e7ba9d95ec6622aa950de272 \
+  && go build ./cmd/chihaya
+
 CMD supervisord -n -c /etc/supervisor/supervisord.conf
 
 EXPOSE 5008 8545 8546 8547 37566 40404 40404/udp 40401 40401/udp
