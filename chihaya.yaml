@@ -19,7 +19,7 @@ chihaya:
   http:
     # The network interface that will bind to an HTTP server for serving
     # BitTorrent traffic. Remove this to disable the non-TLS listener.
-    addr: "0.0.0.0:6969"
+    addr: "0.0.0.0:5008"
 
     # The network interface that will bind to an HTTPS server for serving
     # BitTorrent traffic. If set, tls_cert_path and tls_key_path are required.
@@ -85,7 +85,7 @@ chihaya:
   udp:
     # The network interface that will bind to a UDP server for serving
     # BitTorrent traffic.
-    addr: "0.0.0.0:6969"
+    addr: "0.0.0.0:5008"
 
     # The leeway for a timestamp on a connection ID.
     max_clock_skew: 10s
