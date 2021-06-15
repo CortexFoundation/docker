@@ -13,8 +13,9 @@ ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 RUN mkdir -p /work/src
-
 RUN mkdir -p /work/bin/plugins
+
+# full node config
 RUN cd /work/src && git clone https://github.com/CortexFoundation/CortexTheseus.git \
   && cd CortexTheseus \
   && git checkout 72e848aaa7215a15df53496925b1a5b14546f30f \
@@ -27,15 +28,9 @@ WORKDIR /work/bin
 
 RUN ls -alt /work/bin/plugins
 
-#RUN cp /work/src/CortexTheseus/docker/node.conf /etc/supervisor/conf.d/
-
-# if you want to use a specified supervisor conf
-COPY conf.d/*.conf /etc/supervisor/conf.d/
-
-RUN cat /etc/supervisor/conf.d/node.conf
-
 RUN rm -rf /work/src/CortexTheseus
 
+# tracker config
 RUN cd /work/src && git clone https://github.com/chihaya/chihaya.git \
   && cd chihaya \
   && git checkout 057f7afefc383717e7ba9d95ec6622aa950de272 \
@@ -44,8 +39,15 @@ RUN cd /work/src && git clone https://github.com/chihaya/chihaya.git \
 RUN cp -r /work/src/chihaya/chihaya /work/bin/
 COPY chihaya.yaml /etc
 
+RUN rm -rf /work/src/chihaya
+
+# finally
 RUN ls /etc/supervisor/conf.d/
 RUN ls /work/bin
+
+COPY conf.d/*.conf /etc/supervisor/conf.d/
+# if you want to use a specified supervisor conf
+# RUN cat /etc/supervisor/conf.d/node.conf
 
 CMD supervisord -n -c /etc/supervisor/supervisord.conf
 
