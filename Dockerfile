@@ -45,7 +45,8 @@ RUN rm -rf /work/src/chihaya
 RUN ls /etc/supervisor/conf.d/
 RUN ls /work/bin
 
-COPY conf.d/*.conf /etc/supervisor/conf.d/
+COPY conf.d/node.conf /etc/supervisor/conf.d/
+#COPY conf.d/tracker.conf /etc/supervisor/conf.d/
 # if you want to use a specified supervisor conf
 # RUN cat /etc/supervisor/conf.d/node.conf
 
