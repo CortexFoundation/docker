@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 as golang-builder
+FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y curl make gcc g++ git python3 cmake supervisor
 ENV GOLANG_VERSION 1.16.5
 ENV GOLANG_DOWNLOAD_SHA256 b12c23023b68de22f74c0524f10b753e7b08b1504cb7e417eccebdd3fae49061
@@ -18,7 +18,7 @@ RUN mkdir -p /work/bin/plugins
 # full node config
 RUN cd /work/src && git clone https://github.com/CortexFoundation/CortexTheseus.git \
   && cd CortexTheseus \
-  && git checkout 81bbac34d8240e17f5f571fb57d2cc8026750fed \
+  && git checkout 2f532aae475e01cb761afb74af28614923fa0dec \
   && make
 
 RUN cp -r /work/src/CortexTheseus/build/bin/cortex /work/bin/
