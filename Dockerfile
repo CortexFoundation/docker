@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y curl make gcc g++ git python3 cmake supervisor
-ENV GOLANG_VERSION 1.16.5
-ENV GOLANG_DOWNLOAD_SHA256 b12c23023b68de22f74c0524f10b753e7b08b1504cb7e417eccebdd3fae49061
+ENV GOLANG_VERSION 1.16.6
+ENV GOLANG_DOWNLOAD_SHA256 be333ef18b3016e9d7cb7b1ff1fdb0cac800ca0be4cf2290fe613b3d069dfe0d
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
 
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
