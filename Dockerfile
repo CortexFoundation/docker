@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-RUN apt-get update && apt-get install -y curl make gcc g++ git python3 cmake supervisor
+RUN apt-get update && apt-get install -y curl make gcc g++ git python3 cmake supervisor nginx
 ENV GOLANG_VERSION 1.16.6
 ENV GOLANG_DOWNLOAD_SHA256 be333ef18b3016e9d7cb7b1ff1fdb0cac800ca0be4cf2290fe613b3d069dfe0d
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
@@ -18,7 +18,7 @@ RUN mkdir -p /work/bin/plugins
 # full node config
 RUN cd /work/src && git clone https://github.com/CortexFoundation/CortexTheseus.git \
   && cd CortexTheseus \
-  && git checkout 9df5dad81e8b2dfa17906e5c4567f8b611b389bb \
+  && git checkout d25e561041a6f0fde8ed9b47e3601aa32a8e5d99 \
   && make
 
 RUN cp -r /work/src/CortexTheseus/build/bin/cortex /work/bin/
@@ -46,10 +46,12 @@ RUN ls /etc/supervisor/conf.d/
 RUN ls /work/bin
 
 COPY conf.d/node.conf /etc/supervisor/conf.d/
+COPY nginx.conf /etc/nginx/conf.d/
+RUN service nginx restart
 #COPY conf.d/tracker.conf /etc/supervisor/conf.d/
 # if you want to use a specified supervisor conf
-# RUN cat /etc/supervisor/conf.d/node.conf
+RUN cat /etc/supervisor/conf.d/node.conf
 
 CMD supervisord -n -c /etc/supervisor/supervisord.conf
 
-EXPOSE 5008 8545 8546 8547 37566 40404 5008/udp 40404/udp 40401 40401/udp
+EXPOSE 5008 8545 8546 8547 37566 30089 40404 5008/udp 40404/udp 40401 40401/udp
