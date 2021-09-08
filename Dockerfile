@@ -31,23 +31,23 @@ RUN ls -alt /work/bin/plugins
 RUN rm -rf /work/src/CortexTheseus
 
 # tracker config
-RUN cd /work/src && git clone https://github.com/chihaya/chihaya.git \
-  && cd chihaya \
-  && git checkout 057f7afefc383717e7ba9d95ec6622aa950de272 \
-  && go build ./cmd/chihaya
+#RUN cd /work/src && git clone https://github.com/chihaya/chihaya.git \
+#  && cd chihaya \
+#  && git checkout 057f7afefc383717e7ba9d95ec6622aa950de272 \
+#  && go build ./cmd/chihaya
 
-RUN cp -r /work/src/chihaya/chihaya /work/bin/
-COPY chihaya.yaml /etc
+#RUN cp -r /work/src/chihaya/chihaya /work/bin/
+#COPY chihaya.yaml /etc
 
-RUN rm -rf /work/src/chihaya
+#RUN rm -rf /work/src/chihaya
 
 # finally
 RUN ls /etc/supervisor/conf.d/
 RUN ls /work/bin
 
 COPY conf.d/node.conf /etc/supervisor/conf.d/
-COPY nginx.conf /etc/nginx/conf.d/
-RUN service nginx restart
+#COPY nginx.conf /etc/nginx/conf.d/
+#RUN service nginx restart
 #COPY conf.d/tracker.conf /etc/supervisor/conf.d/
 # if you want to use a specified supervisor conf
 RUN cat /etc/supervisor/conf.d/node.conf
