@@ -18,7 +18,7 @@ RUN mkdir -p /work/bin/plugins
 # full node config
 RUN cd /work/src && git clone https://github.com/CortexFoundation/CortexTheseus.git \
   && cd CortexTheseus \
-  && git checkout 11338a91b0ab4741540c1bab95af02b53f0b7d22 \
+  && git checkout ddf52d58de87a63245e9aac98625c6473bda0f5f \
   && make
 
 RUN cp -r /work/src/CortexTheseus/build/bin/cortex /work/bin/
